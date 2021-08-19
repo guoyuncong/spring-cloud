@@ -1,0 +1,18 @@
+server:
+  # 端口
+  port: 9000
+spring:
+  application:
+    # 应用名称
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+          # 路由ID，唯一：product-service
+        - id: product-service
+          # 目标 URI，路由到微服务的地址
+          uri: http://localhost:8082/
+          predicates:
+            # 匹配对应 URL 的请求，将匹配到的请求追加在目标 URI 之后
+            # 比如：http://{gateway}/product/1 将会路由到 http://localhost:8082/product/1
+            - Path=/product/**
